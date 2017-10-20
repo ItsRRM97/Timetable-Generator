@@ -1,15 +1,29 @@
 const http = require('http');
+const fs = require('fs');
+const url = require('url');
+const events = require('events');
+var eventEmitter = new events.EventEmitter();
 
-const hostname = 'localhost';
-const port = 8080;
+var q;
 
+http.createServer(function (req, res) {
+	q = url.parse(req.url, true);
+	var filename = "." + q.pathname;
+	fs.readFile(filename, function(err, data) {
+		if(err) {
+			res.writeHead(404, {'Content-Type':'text/html'});
+			return res.end('404 Not Found!');
+		}
+		res.writeHead(200, {'Content-Type':'text/html'});
+		res.write(data);
+		return res.end();
+	});
+}).listen(8080);
 
-const server = http.createServer((req,res) => { // what  does => mean?
-	res.statusCode = 200;
-	res.setHead('Content-Type', 'text/plain');
-	res.end('Node.js http server running!');
-});
+var myEventHandler = function() {
+	console.log('I hear a scream!');
+}
 
-server.listen(hostname, port, () => {
-	console.log(`Server running at http://${hostname}:${port}/`); // why ` instead of ' here?
-});
+eventEmitter.on('scream', myEventHandler);
+
+eventEmitter.emit('scream');
