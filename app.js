@@ -1,8 +1,10 @@
 const http = require('http');
 const fs = require('fs');
 const url = require('url');
-const events = require('events');
-var eventEmitter = new events.EventEmitter();
+// const events = require('events');
+const database = require('./database');
+
+//var eventEmitter = new events.EventEmitter();
 
 var q;
 
@@ -19,7 +21,9 @@ http.createServer(function (req, res) {
 		return res.end();
 	});
 }).listen(8080);
+console.log('Project running at http://localhost:8080/');
 
+/*
 var myEventHandler = function() {
 	console.log('I hear a scream!');
 }
@@ -27,3 +31,4 @@ var myEventHandler = function() {
 eventEmitter.on('scream', myEventHandler);
 
 eventEmitter.emit('scream');
+*/
