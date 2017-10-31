@@ -1,0 +1,28 @@
+<?php
+$con=mysqli_connect("localhost","root","","builtify") or die(mysqli_error($con));
+if(isset($_POST['addcat']))
+{
+$addctg3 = $_POST['addctg3'];
+$addctg4=$_POST['addctg4'];
+$user_registration_query = "insert into category(ctg3,ctg4) values ('$addctg3','$addctg4')";
+$user_registration_submit = mysqli_query($con, $user_registration_query) or die(mysqli_error($con));
+header("location:upload_catgory.php");
+    }
+if(isset($_POST['login']))
+{
+$product_code=$_POST['pcode'];
+$product_name=$_POST['pname'];
+$brand=$_POST['brand'];
+
+$ctg1=$_POST['ctg1'];$ctg2=$_POST['ctg2'];$ctg3=$_POST['ctg3'];$ctg4=$_POST['ctg4'];
+    $file=addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
+    $file_logo=addslashes(file_get_contents($_FILES["logo"]["tmp_name"]));
+    
+    
+    
+    
+$query = "insert into form(product_code,product_name,brand,category1,category2,category3,rate_unit,image) values ('$product_code','$product_name','$brand','$ctg1','$ctg2','$ctg3','$ctg4','$file','$file_logo')";
+$query_result = mysqli_query($con, $query) or die(mysqli_error($con));
+header("location:upload_catgory.php");
+}
+?>
