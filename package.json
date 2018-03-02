@@ -1,9 +1,24 @@
 {
-	"name": "timetable",
-	"version": "0.0.1",
-	"description": "A Timetable generator for organizations",
-	"dependencies": {
-		"express": "~3.4.8",
-		"mongoose": "~3.8.6"
-	}
+  "name": "timetable-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js",
+    "watch": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ItsRRM97/Timetable-Generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ItsRRM97/Timetable-Generator/issues"
+  },
+  "homepage": "https://github.com/ItsRRM97/Timetable-Generator#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
