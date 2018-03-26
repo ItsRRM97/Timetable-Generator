@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/ItsRRM97/Timetable-Generator#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "semantic-ui-css": "^2.3.1",
+    "semantic-ui-react": "^0.79.0"
   }
 }
