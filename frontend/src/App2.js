@@ -1,6 +1,26 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import './App.css';
 import uuid from 'uuid';
+import interact from 'interactjs'
+
+const draggableOptions = {
+  onmove: event => {
+     const target = event.target
+   // keep the dragged position in the data-x/data-y attributes
+   const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+   const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+
+   // translate the element
+   target.style.webkitTransform =
+   target.style.transform =
+     'translate(' + x + 'px, ' + y + 'px)'
+
+   // update the posiion attributes
+   target.setAttribute('data-x', x);
+   target.setAttribute('data-y', y);
+ }
+}
 
 export default class App extends React.Component {
   state={
@@ -76,6 +96,15 @@ export default class App extends React.Component {
 }
 
 class EditableTimerList extends React.Component {
+  componentDidMount () {
+    this.interactable = interact(ReactDOM.findDOMNode(this));
+    this.interactable
+        .draggable(draggableOptions)
+  };
+  componentWillUnmount () {
+      this.interactable.unset();
+      this.interactable = null;
+  };
   render() {
     const timers=this.props.timers.map((timer)=>(
           <EditableTimer
